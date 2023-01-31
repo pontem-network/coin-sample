@@ -47,6 +47,10 @@ module coin_address::user_coin {
         move_to(coin_admin, caps);
     }
 
+    public entry fun register(user: signer) {
+        coin::register<UserCoin>(&user);
+    }
+
     /// Mints an `amount` of Coin<COIN> and deposits it to the address `to_addr`.
     public entry fun mint(coin_admin: &signer, to_addr: address, amount: u64) acquires Capabilities {
         assert!(signer::address_of(coin_admin) == @coin_address, ERR_NOT_ADMIN);
